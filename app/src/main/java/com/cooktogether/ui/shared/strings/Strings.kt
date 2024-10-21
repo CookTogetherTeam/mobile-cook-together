@@ -1,5 +1,6 @@
 package com.cooktogether.ui.shared.strings
 
+import com.cooktogether.ui.flows.onboarding.resources.OnboardingStepStrings
 import com.cooktogether.ui.flows.tabNavigation.tabs.ui.resources.TabNavigationStrings
 
 object Locales {
@@ -8,4 +9,5 @@ object Locales {
 
 data class Strings(
     val tabNavigation: TabNavigationStrings,
+    val onboardingStep: OnboardingStepStrings,
 )

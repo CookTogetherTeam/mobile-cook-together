@@ -10,4 +10,6 @@ enum class CTColor(
     Dark(Color(0xFF131313)),
     Background(Color(0xFFFFFFFF)),
     Surface(Color(0xFFF8F8F8)),
+    PrimaryButton(Color(0xFFFECD99)),
+    SecondaryButton(Color(0x87788349)),
 }

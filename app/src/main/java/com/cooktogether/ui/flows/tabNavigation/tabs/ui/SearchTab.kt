@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.cooktogether.R
-import com.cooktogether.ui.flows.home.steps.RecipesHomeStep
-import com.cooktogether.ui.flows.home.steps.state.utils.RecipesHomeStateUtils
+import com.cooktogether.ui.flows.explore.steps.ExploreListCardsStep
+import com.cooktogether.ui.flows.explore.steps.state.utils.ExploreRecipesStateUtils
 import com.cooktogether.ui.flows.tabNavigation.tabs.custom.CookTogetherTab
 import com.cooktogether.ui.flows.tabNavigation.tabs.ui.resources.tabNavigationStrings
 
@@ -33,9 +33,10 @@ object SearchTab : CookTogetherTab {
 
     @Composable
     override fun Content(innerPadding: PaddingValues) {
-        RecipesHomeStep(
+        val items = ExploreRecipesStateUtils.fake(20)
+        ExploreListCardsStep(
             modifier = Modifier.padding(innerPadding),
-            state = RecipesHomeStateUtils.fake,
+            state = items,
         )
     }
 }
