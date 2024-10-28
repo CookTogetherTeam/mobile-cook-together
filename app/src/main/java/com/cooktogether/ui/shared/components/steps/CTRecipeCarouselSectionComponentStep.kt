@@ -53,9 +53,6 @@ fun CTRecipeCarouselSectionComponentStep(model: CTRecipeCarouselSectionComponent
                 color = CTColor.Dark.color,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Normal,
-                modifier =
-                    Modifier
-                        .clickable(onClick = model.action),
             )
         }
 
@@ -77,7 +74,6 @@ fun RecipeCarouselPreview() {
             CTRecipeCarouselSectionComponentPresentation(
                 title = "Receitas do Dia",
                 actionTitle = "Ver mais".uppercase(),
-                action = { },
                 items =
                     listOf(
                         CTRecipeCardComponentPresentation(
@@ -87,7 +83,6 @@ fun RecipeCarouselPreview() {
                             tags = listOf("Café", "Almoço"),
                             userName = "John Doe",
                             favoriteRecipe = false,
-                            favoriteRecipeAction = { },
                             measurements =
                                 CTRecipeCardComponentMeasurementsPresentation(
                                     widthCard = 200,
@@ -102,7 +97,6 @@ fun RecipeCarouselPreview() {
                             tags = listOf("Almoço", "Saudável"),
                             userName = "Jane Smith",
                             favoriteRecipe = true,
-                            favoriteRecipeAction = { },
                             measurements =
                                 CTRecipeCardComponentMeasurementsPresentation(
                                     widthCard = 200,
@@ -117,7 +111,6 @@ fun RecipeCarouselPreview() {
                             tags = listOf("Café", "Doce"),
                             userName = "Emily Davis",
                             favoriteRecipe = false,
-                            favoriteRecipeAction = { },
                             measurements =
                                 CTRecipeCardComponentMeasurementsPresentation(
                                     widthCard = 200,

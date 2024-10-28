@@ -24,10 +24,9 @@ internal object ExploreRecipesStateUtils {
             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
             prepareTime = "20min",
             recipeTitle = "Ovo Frito",
-            tags = listOf("Café", "Almoço", "Café"),
+            tags = listOf("Café"),
             userName = "John Doe",
             favoriteRecipe = false,
-            favoriteRecipeAction = { },
             measurements =
             CTRecipeCardComponentMeasurementsPresentation(
                 widthCard = 183,

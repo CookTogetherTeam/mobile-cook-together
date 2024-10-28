@@ -16,8 +16,4 @@ sealed class Section {
     data class RecipeCarousel(
         val model: CTRecipeCarouselSectionComponentPresentation,
     ) : Section()
-
-    data class RecipeList(
-        val model: CTRecipeListSectionComponentPresentation,
-    ) : Section()
 }

@@ -93,21 +93,6 @@ internal fun CTRecipeCardComponentStep(
                         .padding(horizontal = 12.dp)
                         .padding(bottom = 12.dp),
             ) {
-                FlowRow(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    model.tags.forEach { hashtag ->
-                        Text(
-                            text = "#$hashtag",
-                            color = CTColor.Dark.color,
-                            modifier =
-                                Modifier
-                                    .background(CTColor.Primary.color, shape = RoundedCornerShape(16.dp))
-                                    .padding(horizontal = 8.dp, vertical = 4.dp),
-                        )
-                    }
-                }
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier =
@@ -144,7 +129,7 @@ internal fun CTRecipeCardComponentStep(
                             )
                         }
                         IconButton(
-                            onClick = model.favoriteRecipeAction,
+                            onClick = {},
                             modifier = Modifier.size(24.dp).weight(1f),
                         ) {
                             Image(
@@ -171,7 +156,6 @@ fun RecipeCardPreview() {
                 tags = listOf("Café", "Almoço", "Café"),
                 userName = "John Doe",
                 favoriteRecipe = false,
-                favoriteRecipeAction = { },
                 measurements =
                     CTRecipeCardComponentMeasurementsPresentation(
                         widthCard = 361,

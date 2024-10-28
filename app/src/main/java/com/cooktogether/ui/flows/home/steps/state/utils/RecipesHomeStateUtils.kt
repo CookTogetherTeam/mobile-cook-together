@@ -5,8 +5,6 @@ import com.cooktogether.ui.flows.home.steps.state.Section
 import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentMeasurementsPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeCarouselSectionComponentPresentation
-import com.cooktogether.ui.shared.components.models.CTRecipeListItemComponentPresentation
-import com.cooktogether.ui.shared.components.models.CTRecipeListSectionComponentPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeSingleSectionComponentPresentation
 
 internal object RecipesHomeStateUtils {
@@ -17,11 +15,9 @@ internal object RecipesHomeStateUtils {
                     Section.SingleRecipe(
                         model =
                             CTRecipeSingleSectionComponentPresentation(
-                                showIndicator = false,
                                 title = "Almoço",
                                 actionTitle = "VER MAIS",
-                                action = { },
-                                items = listOf(makeSingleCard()),
+                                item = makeSingleCard(),
                             ),
                     ),
                     Section.RecipeCarousel(
@@ -29,7 +25,6 @@ internal object RecipesHomeStateUtils {
                             CTRecipeCarouselSectionComponentPresentation(
                                 title = "Almoço",
                                 actionTitle = "VER MAIS",
-                                action = { },
                                 items =
                                     listOf(
                                         makeSection(),
@@ -38,40 +33,16 @@ internal object RecipesHomeStateUtils {
                                     ),
                             ),
                     ),
-                    Section.SingleRecipe(
-                        model =
-                            CTRecipeSingleSectionComponentPresentation(
-                                showIndicator = true,
-                                title = "Almoço",
-                                actionTitle = "VER MAIS",
-                                action = { },
-                                items = listOf(makeSingleCard()),
-                            ),
-                    ),
                     Section.RecipeCarousel(
                         model =
                             CTRecipeCarouselSectionComponentPresentation(
                                 title = "Almoço",
                                 actionTitle = "VER MAIS",
-                                action = { },
                                 items =
                                     listOf(
                                         makeSection(),
                                         makeSection(),
                                         makeSection(),
-                                    ),
-                            ),
-                    ),
-                    Section.RecipeList(
-                        model =
-                            CTRecipeListSectionComponentPresentation(
-                                title = "Receitas",
-                                items =
-                                    listOf(
-                                        makeListCard(),
-                                        makeListCard(),
-                                        makeListCard(),
-                                        makeListCard(),
                                     ),
                             ),
                     ),
@@ -86,7 +57,6 @@ internal object RecipesHomeStateUtils {
             tags = listOf("Café", "Almoço", "Café"),
             userName = "John Doe",
             favoriteRecipe = false,
-            favoriteRecipeAction = { },
             measurements =
                 CTRecipeCardComponentMeasurementsPresentation(
                     widthCard = 264,
@@ -103,14 +73,5 @@ internal object RecipesHomeStateUtils {
                     fontSizeTitle = 24,
                     fontSizeUserName = 16,
                 ),
-        )
-
-    fun makeListCard() =
-        CTRecipeListItemComponentPresentation(
-            imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-            recipeTitle = "Ovo Frito",
-            prepareTime = "20min",
-            favoriteRecipe = false,
-            favoriteRecipeAction = {},
         )
 }

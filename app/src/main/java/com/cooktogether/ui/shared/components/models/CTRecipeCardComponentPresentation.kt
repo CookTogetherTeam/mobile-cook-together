@@ -7,6 +7,5 @@ data class CTRecipeCardComponentPresentation(
     val tags: List<String>,
     val userName: String,
     val favoriteRecipe: Boolean,
-    val favoriteRecipeAction: () -> Unit,
     val measurements: CTRecipeCardComponentMeasurementsPresentation,
 )

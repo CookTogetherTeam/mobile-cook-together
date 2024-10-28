@@ -2,19 +2,12 @@ package com.cooktogether.ui.shared.components.steps
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +25,6 @@ import com.cooktogether.ui.theme.CTColor
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CTRecipeSingleSectionComponentStep(model: CTRecipeSingleSectionComponentPresentation) {
-    val pagerState = rememberPagerState(pageCount = { model.items.size })
 
     Column(
         modifier =
@@ -61,47 +53,11 @@ fun CTRecipeSingleSectionComponentStep(model: CTRecipeSingleSectionComponentPres
                 color = CTColor.Dark.color,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Normal,
-                modifier =
-                    Modifier
-                        .clickable(onClick = model.action),
             )
         }
-
         Spacer(modifier = Modifier.height(8.dp))
 
-        HorizontalPager(
-            state = pagerState,
-            modifier =
-                Modifier
-                    .fillMaxWidth(),
-        ) { page ->
-            CTRecipeCardComponentStep(
-                model = model.items[page],
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        if (model.showIndicator) {
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier =
-                    Modifier
-                        .fillMaxWidth(),
-            ) {
-                repeat(model.items.size) { index ->
-                    val color = if (pagerState.currentPage == index) CTColor.Primary.color else CTColor.Surface.color
-                    Box(
-                        modifier =
-                            Modifier
-                                .padding(4.dp)
-                                .size(8.dp)
-                                .background(color, CircleShape),
-                    )
-                }
-            }
-        }
+        CTRecipeCardComponentStep(model = model.item)
     }
 }
 
@@ -111,58 +67,22 @@ fun RecipeSingleSectionPreview() {
     CTRecipeSingleSectionComponentStep(
         model =
             CTRecipeSingleSectionComponentPresentation(
-                showIndicator = true,
                 title = "Receitas do Dia",
                 actionTitle = "Ver mais".uppercase(),
-                action = { },
-                items =
-                    listOf(
-                        CTRecipeCardComponentPresentation(
-                            imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "20min",
-                            recipeTitle = "Ovo Frito",
-                            tags = listOf("Café", "Almoço"),
-                            userName = "John Doe",
-                            favoriteRecipe = false,
-                            favoriteRecipeAction = { },
-                            measurements =
-                                CTRecipeCardComponentMeasurementsPresentation(
-                                    widthCard = null,
-                                    fontSizeTitle = 24,
-                                    fontSizeUserName = 16,
-                                ),
-                        ),
-                        CTRecipeCardComponentPresentation(
-                            imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "10min",
-                            recipeTitle = "Salada Colorida",
-                            tags = listOf("Almoço", "Saudável"),
-                            userName = "Jane Smith",
-                            favoriteRecipe = true,
-                            favoriteRecipeAction = { },
-                            measurements =
-                                CTRecipeCardComponentMeasurementsPresentation(
-                                    widthCard = 200,
-                                    fontSizeTitle = 24,
-                                    fontSizeUserName = 16,
-                                ),
-                        ),
-                        CTRecipeCardComponentPresentation(
-                            imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "30min",
-                            recipeTitle = "Panquecas",
-                            tags = listOf("Café", "Doce"),
-                            userName = "Emily Davis",
-                            favoriteRecipe = false,
-                            favoriteRecipeAction = { },
-                            measurements =
-                                CTRecipeCardComponentMeasurementsPresentation(
-                                    widthCard = 200,
-                                    fontSizeTitle = 24,
-                                    fontSizeUserName = 16,
-                                ),
-                        ),
+                item = CTRecipeCardComponentPresentation(
+                    imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
+                    prepareTime = "20min",
+                    recipeTitle = "Ovo Frito",
+                    tags = listOf("Café", "Almoço", "Café"),
+                    userName = "John Doe",
+                    favoriteRecipe = false,
+                    measurements =
+                    CTRecipeCardComponentMeasurementsPresentation(
+                        widthCard = 361,
+                        fontSizeTitle = 24,
+                        fontSizeUserName = 16,
                     ),
+                ),
             ),
     )
 }

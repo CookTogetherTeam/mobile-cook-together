@@ -10,10 +10,8 @@ import com.cooktogether.ui.flows.home.steps.state.RecipesHomeState
 import com.cooktogether.ui.flows.home.steps.state.Section
 import com.cooktogether.ui.flows.home.steps.state.utils.RecipesHomeStateUtils
 import com.cooktogether.ui.shared.components.models.CTRecipeCarouselSectionComponentPresentation
-import com.cooktogether.ui.shared.components.models.CTRecipeListSectionComponentPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeSingleSectionComponentPresentation
 import com.cooktogether.ui.shared.components.steps.CTRecipeCarouselSectionComponentStep
-import com.cooktogether.ui.shared.components.steps.CTRecipeListSectionComponent
 import com.cooktogether.ui.shared.components.steps.CTRecipeSingleSectionComponentStep
 import com.cooktogether.ui.theme.CTColor
 
@@ -31,7 +29,6 @@ fun RecipesHomeStep(
             when (section) {
                 is Section.SingleRecipe -> SingleRecipeSection(section.model)
                 is Section.RecipeCarousel -> RecipeCarouselSection(section.model)
-                is Section.RecipeList -> RecipeListSection(section.model)
             }
         }
     }
@@ -45,11 +42,6 @@ fun SingleRecipeSection(model: CTRecipeSingleSectionComponentPresentation) {
 @Composable
 fun RecipeCarouselSection(model: CTRecipeCarouselSectionComponentPresentation) {
     CTRecipeCarouselSectionComponentStep(model = model)
-}
-
-@Composable
-fun RecipeListSection(model: CTRecipeListSectionComponentPresentation) {
-    CTRecipeListSectionComponent(model = model)
 }
 
 @Preview(showBackground = true)
