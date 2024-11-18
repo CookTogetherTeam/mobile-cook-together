@@ -4,4 +4,5 @@ data class CTRecipeCarouselSectionComponentPresentation(
     val title: String,
     val actionTitle: String,
     val items: List<CTRecipeCardComponentPresentation>,
+    val categoryId: Int,
 )

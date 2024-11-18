@@ -22,7 +22,6 @@ internal object ExploreRecipesStateUtils {
     private fun makeModel() =
         CTRecipeCardComponentPresentation(
             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-            prepareTime = "20min",
             recipeTitle = "Ovo Frito",
             tags = listOf("Café"),
             userName = "John Doe",
@@ -33,5 +32,6 @@ internal object ExploreRecipesStateUtils {
                 fontSizeTitle = 16,
                 fontSizeUserName = 12,
             ),
+            id = 1,
         )
 }

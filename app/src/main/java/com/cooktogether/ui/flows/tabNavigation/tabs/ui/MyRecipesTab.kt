@@ -36,6 +36,7 @@ object MyRecipesTab : CookTogetherTab {
         RecipesHomeStep(
             modifier = Modifier.padding(innerPadding),
             state = RecipesHomeStateUtils.fake,
+            onExploreCategoryClick = { _, _ -> }
         )
     }
 }

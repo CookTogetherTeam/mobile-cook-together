@@ -1,5 +1,6 @@
 package com.cooktogether.ui.flows.tabNavigation.tabs.ui
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.vectorResource
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.cooktogether.R
+import com.cooktogether.ui.flows.addrecipes.navigation.NewRecipeFlow
 import com.cooktogether.ui.flows.home.steps.RecipesHomeStep
 import com.cooktogether.ui.flows.home.steps.state.utils.RecipesHomeStateUtils
 import com.cooktogether.ui.flows.tabNavigation.tabs.custom.CookTogetherTab
@@ -24,7 +26,7 @@ object AddRecipeTab : CookTogetherTab {
             val icon = rememberVectorPainter(ImageVector.vectorResource(R.drawable.ic_add))
             val option =
                 TabOptions(
-                    index = 0u,
+                    index = 2u,
                     title = tabNavigationStrings.addRecipe,
                     icon = icon,
                 )
@@ -33,9 +35,8 @@ object AddRecipeTab : CookTogetherTab {
 
     @Composable
     override fun Content(innerPadding: PaddingValues) {
-        RecipesHomeStep(
-            modifier = Modifier.padding(innerPadding),
-            state = RecipesHomeStateUtils.fake,
-        )
+        Box(modifier = Modifier.padding(innerPadding)) {
+            NewRecipeFlow()
+        }
     }
 }

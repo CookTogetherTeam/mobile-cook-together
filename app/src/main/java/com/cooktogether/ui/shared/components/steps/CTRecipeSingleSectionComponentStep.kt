@@ -2,6 +2,7 @@ package com.cooktogether.ui.shared.components.steps
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +25,10 @@ import com.cooktogether.ui.theme.CTColor
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CTRecipeSingleSectionComponentStep(model: CTRecipeSingleSectionComponentPresentation) {
+fun CTRecipeSingleSectionComponentStep(
+    model: CTRecipeSingleSectionComponentPresentation,
+    onExploreCategoryClick: (Int, String) -> Unit
+) {
 
     Column(
         modifier =
@@ -53,6 +57,12 @@ fun CTRecipeSingleSectionComponentStep(model: CTRecipeSingleSectionComponentPres
                 color = CTColor.Dark.color,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Normal,
+                modifier = Modifier.clickable {
+                    onExploreCategoryClick(
+                        model.categoryId,
+                        model.title
+                    )
+                }
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -71,7 +81,6 @@ fun RecipeSingleSectionPreview() {
                 actionTitle = "Ver mais".uppercase(),
                 item = CTRecipeCardComponentPresentation(
                     imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                    prepareTime = "20min",
                     recipeTitle = "Ovo Frito",
                     tags = listOf("Café", "Almoço", "Café"),
                     userName = "John Doe",
@@ -82,7 +91,10 @@ fun RecipeSingleSectionPreview() {
                         fontSizeTitle = 24,
                         fontSizeUserName = 16,
                     ),
+                    id = 1,
                 ),
+                categoryId = 1
             ),
+        onExploreCategoryClick = { _, _ -> }
     )
 }

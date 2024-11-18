@@ -27,7 +27,9 @@ import com.cooktogether.ui.flows.tabNavigation.tabs.ui.ProfileTab
 import com.cooktogether.ui.flows.tabNavigation.tabs.ui.SearchTab
 import com.cooktogether.ui.shared.strings.ProvideCookTogetherStrings
 import com.cooktogether.ui.theme.CookTogetherTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TabNavigationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

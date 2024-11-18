@@ -1,7 +1,6 @@
 package com.cooktogether.ui.flows.home.steps.state
 
 import com.cooktogether.ui.shared.components.models.CTRecipeCarouselSectionComponentPresentation
-import com.cooktogether.ui.shared.components.models.CTRecipeListSectionComponentPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeSingleSectionComponentPresentation
 
 data class RecipesHomeState(

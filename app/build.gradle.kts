@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ktlintGradle)
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -18,6 +19,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 
     buildTypes {
@@ -54,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,13 +72,16 @@ dependencies {
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.tab.navigator)
     // Hilt
-    implementation(libs.hilt.android)
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
     kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
     // Strings
     implementation(libs.lyricist)
     // Request
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.android)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
     // LiveData
     implementation(libs.androidx.lifecycle.livedata.ktx)
     // ViewModel para MVVM

@@ -18,6 +18,7 @@ internal object RecipesHomeStateUtils {
                                 title = "Almoço",
                                 actionTitle = "VER MAIS",
                                 item = makeSingleCard(),
+                                categoryId = 1
                             ),
                     ),
                     Section.RecipeCarousel(
@@ -31,6 +32,7 @@ internal object RecipesHomeStateUtils {
                                         makeSection(),
                                         makeSection(),
                                     ),
+                                categoryId = 1,
                             ),
                     ),
                     Section.RecipeCarousel(
@@ -44,6 +46,7 @@ internal object RecipesHomeStateUtils {
                                         makeSection(),
                                         makeSection(),
                                     ),
+                                categoryId = 1,
                             ),
                     ),
                 ),
@@ -52,7 +55,6 @@ internal object RecipesHomeStateUtils {
     fun makeSection() =
         CTRecipeCardComponentPresentation(
             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-            prepareTime = "20min",
             recipeTitle = "Ovo Frito",
             tags = listOf("Café", "Almoço", "Café"),
             userName = "John Doe",
@@ -63,6 +65,7 @@ internal object RecipesHomeStateUtils {
                     fontSizeTitle = 24,
                     fontSizeUserName = 16,
                 ),
+            id = 1,
         )
 
     fun makeSingleCard() =

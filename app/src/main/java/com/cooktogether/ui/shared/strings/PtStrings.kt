@@ -1,9 +1,13 @@
 package com.cooktogether.ui.shared.strings
 
 import cafe.adriel.lyricist.LyricistStrings
+import com.cooktogether.ui.flows.details.resources.RecipeDetailsStrings
 import com.cooktogether.ui.flows.onboarding.resources.OnboardingStepStrings
 import com.cooktogether.ui.flows.onboarding.resources.onboardingStepStrings
 import com.cooktogether.ui.flows.tabNavigation.tabs.ui.resources.TabNavigationStrings
+import com.cooktogether.ui.shared.components.steps.error.ErrorViewStrings
+import com.cooktogether.ui.shared.components.steps.loading.LoadingViewStrings
+import com.cooktogether.ui.shared.components.steps.loading.loadingViewStrings
 
 @LyricistStrings(languageTag = Locales.PT, default = true)
 internal val PtStrings =
@@ -22,6 +26,18 @@ internal val PtStrings =
             firstTopic = "Acesse um catálogo diversificado de receitas em um só lugar",
             secondTopic = "Compartilhe suas receitas favoritas",
             continueButton = "Continuar",
-            loginButton = "Login/Cadastre-se"
+            loginButton = "Login/Cadastre-se",
+        ),
+        loadingViewStrings = LoadingViewStrings(
+            getRecipes = "Carregando receitas",
+            getCategoryRecipes = "Carregando mais receitas dessa categoria",
+            getDetails = "Buscando detalhes",
+        ),
+        errorViewStrings = ErrorViewStrings(
+            unknownError = "Erro desconhecido"
+        ),
+        recipeDetailsStrings = RecipeDetailsStrings(
+            ingredients = "Ingredientes",
+            preparationSteps = "Modo de Preparo"
         )
     )

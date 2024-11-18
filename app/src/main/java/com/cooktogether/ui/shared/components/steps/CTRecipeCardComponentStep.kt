@@ -2,11 +2,11 @@ package com.cooktogether.ui.shared.components.steps
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,11 +28,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import coil.compose.AsyncImage
+import com.cooktogether.R
+import com.cooktogether.ui.flows.details.step.RecipeDetailsScreen
 import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentMeasurementsPresentation
 import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentPresentation
 import com.cooktogether.ui.theme.CTColor
@@ -43,6 +48,8 @@ internal fun CTRecipeCardComponentStep(
     modifier: Modifier = Modifier,
     model: CTRecipeCardComponentPresentation,
 ) {
+    val navigator = LocalNavigator.currentOrThrow
+
     Card(
         modifier =
             modifier
@@ -51,6 +58,11 @@ internal fun CTRecipeCardComponentStep(
                     fillMaxWidth()
                 }.modifyIfNotNull(model.measurements.widthCard?.dp) {
                     width(it)
+                }
+                .clickable {
+                    navigator.push(
+                        RecipeDetailsScreen(id = model.id)
+                    )
                 },
         shape = RoundedCornerShape(16.dp),
         elevation =
@@ -69,22 +81,12 @@ internal fun CTRecipeCardComponentStep(
                 AsyncImage(
                     model = model.imageUrl,
                     contentDescription = "Recipe Image",
+                    placeholder = painterResource(id = R.drawable.noimage),
+                    error = painterResource(id = R.drawable.noimage),
                     contentScale = ContentScale.FillBounds,
                     modifier =
                         Modifier
                             .height(200.dp),
-                )
-                Text(
-                    text = model.prepareTime,
-                    color = CTColor.Dark.color,
-                    modifier =
-                        Modifier
-                            .padding(8.dp)
-                            .background(
-                                Color(0xFFF8F8F8),
-                                shape = RoundedCornerShape(16.dp),
-                            ).padding(horizontal = 8.dp, vertical = 4.dp)
-                            .align(Alignment.TopStart),
                 )
             }
             Column(
@@ -151,7 +153,6 @@ fun RecipeCardPreview() {
         model =
             CTRecipeCardComponentPresentation(
                 imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                prepareTime = "20min",
                 recipeTitle = "Ovo Frito",
                 tags = listOf("Café", "Almoço", "Café"),
                 userName = "John Doe",
@@ -162,6 +163,7 @@ fun RecipeCardPreview() {
                         fontSizeTitle = 24,
                         fontSizeUserName = 16,
                     ),
+                id = 1,
             ),
     )
 }

@@ -19,6 +19,7 @@ import com.cooktogether.ui.theme.CTColor
 fun RecipesHomeStep(
     modifier: Modifier = Modifier,
     state: RecipesHomeState,
+    onExploreCategoryClick: (Int, String) -> Unit
 ) {
     LazyColumn(
         modifier =
@@ -27,25 +28,46 @@ fun RecipesHomeStep(
     ) {
         items(state.sections) { section ->
             when (section) {
-                is Section.SingleRecipe -> SingleRecipeSection(section.model)
-                is Section.RecipeCarousel -> RecipeCarouselSection(section.model)
+                is Section.SingleRecipe -> SingleRecipeSection(
+                    section.model,
+                    onExploreCategoryClick
+                )
+                is Section.RecipeCarousel -> RecipeCarouselSection(
+                    section.model,
+                    onExploreCategoryClick
+                )
             }
         }
     }
 }
 
 @Composable
-fun SingleRecipeSection(model: CTRecipeSingleSectionComponentPresentation) {
-    CTRecipeSingleSectionComponentStep(model = model)
+fun SingleRecipeSection(
+    model: CTRecipeSingleSectionComponentPresentation,
+    onExploreCategoryClick: (Int, String) -> Unit
+) {
+    CTRecipeSingleSectionComponentStep(
+        model = model,
+        onExploreCategoryClick = onExploreCategoryClick
+    )
 }
 
 @Composable
-fun RecipeCarouselSection(model: CTRecipeCarouselSectionComponentPresentation) {
-    CTRecipeCarouselSectionComponentStep(model = model)
+fun RecipeCarouselSection(
+    model: CTRecipeCarouselSectionComponentPresentation,
+    onExploreCategoryClick: (Int, String) -> Unit
+) {
+    CTRecipeCarouselSectionComponentStep(
+        model = model,
+        onExploreCategoryClick = onExploreCategoryClick
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun RecipesHomeStepPreview() {
-    RecipesHomeStep(state = RecipesHomeStateUtils.fake)
+    RecipesHomeStep(
+        state = RecipesHomeStateUtils.fake,
+        onExploreCategoryClick = { _, _ -> }
+    )
 }

@@ -25,7 +25,10 @@ import com.cooktogether.ui.shared.components.models.CTRecipeCarouselSectionCompo
 import com.cooktogether.ui.theme.CTColor
 
 @Composable
-fun CTRecipeCarouselSectionComponentStep(model: CTRecipeCarouselSectionComponentPresentation) {
+fun CTRecipeCarouselSectionComponentStep(
+    model: CTRecipeCarouselSectionComponentPresentation,
+    onExploreCategoryClick: (Int, String) -> Unit
+) {
     Column(
         modifier =
             Modifier
@@ -53,6 +56,12 @@ fun CTRecipeCarouselSectionComponentStep(model: CTRecipeCarouselSectionComponent
                 color = CTColor.Dark.color,
                 style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Normal,
+                modifier = Modifier.clickable {
+                    onExploreCategoryClick(
+                        model.categoryId,
+                        model.title
+                    )
+                }
             )
         }
 
@@ -78,7 +87,6 @@ fun RecipeCarouselPreview() {
                     listOf(
                         CTRecipeCardComponentPresentation(
                             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "20min",
                             recipeTitle = "Ovo Frito",
                             tags = listOf("Café", "Almoço"),
                             userName = "John Doe",
@@ -89,10 +97,10 @@ fun RecipeCarouselPreview() {
                                     fontSizeTitle = 24,
                                     fontSizeUserName = 16,
                                 ),
+                            id = 1,
                         ),
                         CTRecipeCardComponentPresentation(
                             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "10min",
                             recipeTitle = "Salada Colorida",
                             tags = listOf("Almoço", "Saudável"),
                             userName = "Jane Smith",
@@ -103,10 +111,10 @@ fun RecipeCarouselPreview() {
                                     fontSizeTitle = 24,
                                     fontSizeUserName = 16,
                                 ),
+                            id = 1,
                         ),
                         CTRecipeCardComponentPresentation(
                             imageUrl = "https://static.itdg.com.br/images/622-auto/3e947dc77ac3e8275f70e73414d816d3/capa.jpg",
-                            prepareTime = "30min",
                             recipeTitle = "Panquecas",
                             tags = listOf("Café", "Doce"),
                             userName = "Emily Davis",
@@ -117,8 +125,11 @@ fun RecipeCarouselPreview() {
                                     fontSizeTitle = 24,
                                     fontSizeUserName = 16,
                                 ),
+                            id = 1,
                         ),
                     ),
+                categoryId = 1,
             ),
+        onExploreCategoryClick = { _, _ -> }
     )
 }
