@@ -1,32 +1,25 @@
 package com.cooktogether.ui.shared.components.steps
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,7 +35,6 @@ import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentMeasure
 import com.cooktogether.ui.shared.components.models.CTRecipeCardComponentPresentation
 import com.cooktogether.ui.theme.CTColor
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
 internal fun CTRecipeCardComponentStep(
     modifier: Modifier = Modifier,
@@ -110,36 +102,36 @@ internal fun CTRecipeCardComponentStep(
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier,
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.weight(9f),
-                        ) {
-                            Image(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = "Author Icon",
-                            )
-                            Text(
-                                text = model.userName,
-                                fontSize = model.measurements.fontSizeUserName.sp,
-                                color = CTColor.Dark.color,
-                            )
-                        }
-                        IconButton(
-                            onClick = {},
-                            modifier = Modifier.size(24.dp).weight(1f),
-                        ) {
-                            Image(
-                                imageVector = Icons.Default.FavoriteBorder,
-                                contentDescription = "Heart Icon",
-                            )
-                        }
-                    }
+//                    Row(
+//                        verticalAlignment = Alignment.CenterVertically,
+//                        horizontalArrangement = Arrangement.SpaceBetween,
+//                        modifier = Modifier.fillMaxWidth(),
+//                    ) {
+//                        Row(
+//                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+//                            verticalAlignment = Alignment.CenterVertically,
+//                            modifier = Modifier.weight(9f),
+//                        ) {
+//                            Image(
+//                                imageVector = Icons.Default.Person,
+//                                contentDescription = "Author Icon",
+//                            )
+//                            Text(
+//                                text = model.userName,
+//                                fontSize = model.measurements.fontSizeUserName.sp,
+//                                color = CTColor.Dark.color,
+//                            )
+//                        }
+//                        IconButton(
+//                            onClick = {},
+//                            modifier = Modifier.size(24.dp).weight(1f),
+//                        ) {
+//                            Image(
+//                                imageVector = Icons.Default.FavoriteBorder,
+//                                contentDescription = "Heart Icon",
+//                            )
+//                        }
+                    //}
                 }
             }
         }

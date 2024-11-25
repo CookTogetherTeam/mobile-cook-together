@@ -6,6 +6,7 @@ import com.cooktogether.data.models.Ingredient
 import com.cooktogether.data.models.RecipeRequest
 import com.cooktogether.data.network.RecipesService
 import com.cooktogether.domain.models.Recipe
+import com.cooktogether.ui.flows.addrecipes.steps.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,16 +24,21 @@ class AddRecipeViewModel @Inject constructor(
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
-    private val _recipeSaved = MutableLiveData<Boolean>()
+     val _recipeSaved = MutableLiveData<Boolean>()
     val recipeSaved: LiveData<Boolean> = _recipeSaved
 
     private var recipeName: String? = null
     private var ingredients: List<Ingredient> = emptyList()
     private var steps: List<String>? = null
     private var imageBase64: String? = null
+    var selectedCategory: Category? = null
 
     fun setRecipeName(name: String) {
         recipeName = name
+    }
+
+    fun setCategory(category: Category) {
+        selectedCategory = category
     }
 
     fun setIngredients(ingredientList: List<Ingredient>) {
@@ -55,7 +61,7 @@ class AddRecipeViewModel @Inject constructor(
 
         val recipeRequest = RecipeRequest(
             title = recipeName ?: "",
-            category = 1,
+            category = selectedCategory?.id ?: 1,
             ingredients = ingredients.map { Ingredient(it.name, it.quantity, it.unit) },
             textArea = steps ?: emptyList(),
             imageBase64 = imageBase64
@@ -70,7 +76,7 @@ class AddRecipeViewModel @Inject constructor(
                 _error.postValue(null)
                 _recipeSaved.postValue(true)
             } catch (e: Exception) {
-                _error.postValue("Erro ao adicionar a receita: ${e.message}")
+                _error.postValue("Erro ao adicionar a receita: ${e.localizedMessage ?: "Erro desconhecido"}")
                 _recipe.postValue(null)
                 _recipeSaved.postValue(false)
             }

@@ -59,8 +59,6 @@ class TabNavigationActivity : ComponentActivity() {
                         TabNavigationItem(HomeTab)
                         TabNavigationItem(SearchTab)
                         TabNavigationItem(AddRecipeTab)
-                        TabNavigationItem(MyRecipesTab)
-                        TabNavigationItem(ProfileTab)
                     }
                 },
             )

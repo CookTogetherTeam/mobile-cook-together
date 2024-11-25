@@ -3,6 +3,7 @@ package com.cooktogether.ui.flows.addrecipes.steps
 import android.content.Context
 import android.net.Uri
 import android.util.Base64
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -22,9 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import com.cooktogether.ui.flows.addrecipes.viewmodels.AddRecipeViewModel
 
 @Composable
-fun RecipeImageStep(onFinish: () -> Unit) {
+fun RecipeImageStep(
+    onFinish: () -> Unit,
+    viewModel: AddRecipeViewModel
+) {
     val focusManager = LocalFocusManager.current
     var imagePath by remember { mutableStateOf<String?>(null) }
 
@@ -48,6 +53,7 @@ fun RecipeImageStep(onFinish: () -> Unit) {
                 } ?: run {
                     ImagePicker(onImageSelected = { path ->
                         imagePath = path
+                        viewModel.setImageBase64(path ?: "")
                     })
                 }
             }
@@ -57,12 +63,16 @@ fun RecipeImageStep(onFinish: () -> Unit) {
 
 
 @Composable
-fun ImagePicker(onImageSelected: (String) -> Unit) {
+fun ImagePicker(onImageSelected: (String?) -> Unit) {
     val context = LocalContext.current
     val imageLauncher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
             val imagePath = uriToBase64(it, context)
-            onImageSelected(imagePath)
+            if (imagePath != null) {
+                onImageSelected(imagePath)
+            } else {
+                Toast.makeText(context, "Erro ao converter a imagem", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -71,8 +81,13 @@ fun ImagePicker(onImageSelected: (String) -> Unit) {
     }
 }
 
-fun uriToBase64(uri: Uri, context: Context): String {
-    val inputStream = context.contentResolver.openInputStream(uri)
-    val bytes = inputStream?.readBytes()
-    return Base64.encodeToString(bytes, Base64.DEFAULT)
+fun uriToBase64(uri: Uri, context: Context): String? {
+    return try {
+        val inputStream = context.contentResolver.openInputStream(uri)
+        val bytes = inputStream?.use { it.readBytes() }
+        bytes?.let { Base64.encodeToString(it, Base64.NO_WRAP) }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }

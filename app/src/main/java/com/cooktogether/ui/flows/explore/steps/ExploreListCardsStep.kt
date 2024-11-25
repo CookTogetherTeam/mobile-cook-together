@@ -77,7 +77,8 @@ data class ExploreListCardsScreen(
     override fun Content(innerPadding: PaddingValues) {
         ExploreListCardsStep(
             categoryId = categoryId,
-            categoryTitle = categoryTitle
+            categoryTitle = categoryTitle,
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }

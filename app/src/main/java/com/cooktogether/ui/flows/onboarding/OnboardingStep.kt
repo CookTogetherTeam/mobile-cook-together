@@ -3,13 +3,15 @@ package com.cooktogether.ui.flows.onboarding
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -52,39 +54,39 @@ internal class OnboardingStep : Screen {
                 contentScale = ContentScale.FillBounds,
                 modifier =
                 Modifier
-                    .width(393.dp)
+                    .fillMaxWidth()
                     .height(318.dp),
             )
             Column(
-                modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
+                modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(24.dp),
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(20.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = onboardingStepStrings.header,
                         style =
-                            TextStyle(
-                                fontSize = 16.sp,
-                                lineHeight = 36.sp,
-                                fontWeight = FontWeight(700),
-                                color = CTColor.Dark.color,
-                                textAlign = TextAlign.Center,
-                            ),
+                        TextStyle(
+                            fontSize = 16.sp,
+                            lineHeight = 36.sp,
+                            fontWeight = FontWeight(700),
+                            color = CTColor.Dark.color,
+                            textAlign = TextAlign.Center,
+                        ),
                     )
                     Text(
                         text = onboardingStepStrings.subtitle,
                         style =
-                            TextStyle(
-                                fontSize = 20.sp,
-                                lineHeight = 26.sp,
-                                fontWeight = FontWeight(700),
-                                color = CTColor.Dark.color,
-                                textAlign = TextAlign.Center,
-                            ),
+                        TextStyle(
+                            fontSize = 20.sp,
+                            lineHeight = 26.sp,
+                            fontWeight = FontWeight(700),
+                            color = CTColor.Dark.color,
+                            textAlign = TextAlign.Center,
+                        ),
                     )
                 }
                 IconRow(
@@ -95,22 +97,14 @@ internal class OnboardingStep : Screen {
                     icon = R.drawable.ic_share,
                     text = onboardingStepStrings.secondTopic,
                 )
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(20.dp)
-                ) {
-                    CustomButton(
-                        text = onboardingStepStrings.continueButton,
-                        backgroundColor = CTColor.PrimaryButton.color,
-                        onClick = {
-                            (context as? OnboardingActivity)?.navigateToTabNavigationActivity()
-                        },
-                    )
-                    CustomButton(
-                        text = onboardingStepStrings.loginButton,
-                        backgroundColor = CTColor.SecondaryButton.color,
-                        onClick = {  },
-                    )
-                }
+                Spacer(modifier = Modifier.height(24.dp))
+                CustomButton(
+                    text = onboardingStepStrings.continueButton,
+                    backgroundColor = CTColor.PrimaryButton.color,
+                    onClick = {
+                        (context as? OnboardingActivity)?.navigateToTabNavigationActivity()
+                    },
+                )
             }
         }
     }
@@ -124,18 +118,15 @@ internal class OnboardingStep : Screen {
             horizontalArrangement = Arrangement.spacedBy(17.dp, Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.Start),
-                verticalAlignment = Alignment.CenterVertically,
+            Box(
+                contentAlignment = Alignment.Center,
                 modifier =
                 Modifier
-                    .width(60.dp)
-                    .height(60.dp)
+                    .size(60.dp)
                     .background(
                         color = CTColor.PrimaryOnColor.color,
                         shape = RoundedCornerShape(size = 30.dp),
-                    )
-                    .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp),
+                    ),
             ) {
                 Image(
                     painter = painterResource(id = icon),
@@ -145,12 +136,12 @@ internal class OnboardingStep : Screen {
             Text(
                 text = text,
                 style =
-                    TextStyle(
-                        fontSize = 16.sp,
-                        lineHeight = 24.sp,
-                        fontWeight = FontWeight(500),
-                        color = CTColor.Dark.color,
-                    ),
+                TextStyle(
+                    fontSize = 16.sp,
+                    lineHeight = 24.sp,
+                    fontWeight = FontWeight(500),
+                    color = CTColor.Dark.color,
+                ),
             )
         }
     }

@@ -1,60 +1,82 @@
 package com.cooktogether.ui.flows.addrecipes.steps
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.cooktogether.ui.flows.addrecipes.viewmodels.AddRecipeViewModel
 import com.cooktogether.ui.flows.tabNavigation.tabs.ui.HomeTab
 
-class RecipeNameScreen : Screen {
+class RecipeNameScreen(
+    val viewModel: AddRecipeViewModel
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: AddRecipeViewModel = hiltViewModel()
         RecipeNameStep(
-            onNext = { navigator.push(IngredientsScreen()) },
+            onNext = { navigator.push(CategoryScreen(viewModel)) },
             viewModel = viewModel
         )
     }
 }
 
-class IngredientsScreen : Screen {
+class CategoryScreen(
+    val viewModel: AddRecipeViewModel
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: AddRecipeViewModel = hiltViewModel()
+
+        AddCategoryStep(
+            onCategorySelected = { category ->
+                viewModel.selectedCategory = category
+
+                navigator.push(IngredientsScreen(viewModel))
+            }
+        )
+    }
+}
+
+class IngredientsScreen(
+    val viewModel: AddRecipeViewModel
+) : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         AddIngredientsStep(
-            onNext = { navigator.push(StepsScreen()) },
+            onNext = { navigator.push(StepsScreen(viewModel)) },
             viewModel = viewModel
         )
     }
 }
 
-class StepsScreen : Screen {
+class StepsScreen(
+    val viewModel: AddRecipeViewModel
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: AddRecipeViewModel = hiltViewModel()
         StepByStepScreen(
-            onNext = { navigator.push(ImageScreen()) },
+            onNext = { navigator.push(ImageScreen(viewModel)) },
             viewModel = viewModel
         )
     }
 }
 
-class ImageScreen : Screen {
+class ImageScreen(
+    val viewModel: AddRecipeViewModel
+) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: AddRecipeViewModel = hiltViewModel()
         val recipeSaved by viewModel.recipeSaved.observeAsState()
 
-        RecipeImageStep(onFinish = {
-            viewModel.addRecipe()
+        LaunchedEffect(viewModel, recipeSaved) {
+            if (recipeSaved == null) return@LaunchedEffect
             if (recipeSaved == true) {
                 navigator.push(
                     RecipeSavedScreen(
@@ -67,12 +89,19 @@ class ImageScreen : Screen {
                 navigator.push(
                     RecipeSaveErrorScreen(
                         onButtonClick = {
-                            navigator.replaceAll(listOf(RecipeNameScreen()))
+                            navigator.replaceAll(listOf(RecipeNameScreen(viewModel)))
                         }
                     )
                 )
             }
-        })
+            viewModel._recipeSaved.postValue(null)
+        }
+
+        RecipeImageStep(
+            onFinish = {
+                viewModel.addRecipe()
+            },
+            viewModel = viewModel
+        )
     }
 }
-
