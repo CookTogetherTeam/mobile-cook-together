@@ -92,7 +92,8 @@ fun ExploreListCardsStep(
 ) {
     val recipesState by viewModel.categoryRecipesState.observeAsState()
     val searchRecipesState by viewModel.searchRecipesState.observeAsState()
-    val inputValue = remember { mutableStateOf(categoryTitle.orEmpty()) }
+    val currentSearchQuery by viewModel.currentSearchQuery.observeAsState()
+    val inputValue = remember { mutableStateOf(currentSearchQuery.orEmpty()) }
 
     LaunchedEffect(categoryId) {
         if (categoryId != null) {

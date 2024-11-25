@@ -25,8 +25,12 @@ class ExploreCardsViewModel @Inject constructor(
     private val _searchRecipesState = MutableLiveData<RequestResult<ExploreRecipesState>>()
     val searchRecipesState: LiveData<RequestResult<ExploreRecipesState>> = _searchRecipesState
 
+    private val _currentSearchQuery = MutableLiveData<String?>()
+    val currentSearchQuery: LiveData<String?> = _currentSearchQuery
+
     fun fetchRecipesByCategory(categoryId: Int, title: String? = null) {
         _categoryRecipesState.postValue(RequestResult.Loading)
+        _currentSearchQuery.postValue(title)
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -41,6 +45,7 @@ class ExploreCardsViewModel @Inject constructor(
 
     fun fetchRecipesByName(title: String) {
         _searchRecipesState.postValue(RequestResult.Loading)
+        _currentSearchQuery.postValue(title)
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
