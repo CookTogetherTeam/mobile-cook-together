@@ -21,8 +21,8 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 fun StatusScreen(
     title: String,
     message: String,
-    buttonText: String,
-    onButtonClick: () -> Unit,
+    buttonText: String = "",
+    onButtonClick: (() -> Unit)? = null,
     isSuccess: Boolean = true
 ) {
     val navigator = LocalNavigator.currentOrThrow
@@ -36,7 +36,9 @@ fun StatusScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Card(
-                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
                 shape = MaterialTheme.shapes.medium,
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
@@ -59,13 +61,15 @@ fun StatusScreen(
                         style = MaterialTheme.typography.bodySmall
                     )
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    if (onButtonClick != null) {
+                        Spacer(modifier = Modifier.height(32.dp))
 
-                    Button(onClick = {
-                        onButtonClick()
-                        navigator.pop()
-                    }) {
-                        Text(text = buttonText)
+                        Button(onClick = {
+                            onButtonClick()
+                            navigator.pop()
+                        }) {
+                            Text(text = buttonText)
+                        }
                     }
                 }
             }
@@ -73,16 +77,12 @@ fun StatusScreen(
     }
 }
 
-class RecipeSavedScreen(
-    private val onButtonClick: () -> Unit,
-) : Screen {
+class RecipeSavedScreen : Screen {
     @Composable
     override fun Content() {
         StatusScreen(
             title = "Receita salva com sucesso!",
             message = "Sua receita foi adicionada com sucesso à coleção.",
-            buttonText = "Voltar para a página inicial",
-            onButtonClick = onButtonClick,
             isSuccess = true
         )
     }

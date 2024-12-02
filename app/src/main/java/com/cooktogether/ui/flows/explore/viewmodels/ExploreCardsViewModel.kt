@@ -60,5 +60,6 @@ class ExploreCardsViewModel @Inject constructor(
 
     fun clearSearchResults() {
         _searchRecipesState.postValue(null)
+        _currentSearchQuery.postValue(null)
     }
 }

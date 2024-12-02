@@ -79,11 +79,7 @@ class ImageScreen(
             if (recipeSaved == null) return@LaunchedEffect
             if (recipeSaved == true) {
                 navigator.push(
-                    RecipeSavedScreen(
-                        onButtonClick = {
-                            navigator.push(HomeTab)
-                        }
-                    )
+                    RecipeSavedScreen()
                 )
             } else {
                 navigator.push(
